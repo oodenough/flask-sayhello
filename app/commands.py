@@ -1,27 +1,14 @@
-# -*- coding: utf-8 -*-
-"""
-    :author: Grey Li (李辉)
-    :url: http://greyli.com
-    :copyright: © 2018 Grey Li <withlihui@gmail.com>
-    :license: MIT, see LICENSE for more details.
-"""
 import click
 
-from sayhello import app, db
-from sayhello.models import Message
+from app import app, db
+from app.models import Message
 
 
 @app.cli.command()
-@click.option('--drop', is_flag=True, help='Create after drop.')
-def initdb(drop):
-    """Initialize the database."""
-    if drop:
-        click.confirm('This operation will delete the database, do you want to continue?', abort=True)
-        db.drop_all()
-        click.echo('Drop tables.')
+def initdb():
+    """Initialize SQLite Database."""
     db.create_all()
-    click.echo('Initialized database.')
-
+    click.echo('Database has been initialized.')
 
 @app.cli.command()
 @click.option('--count', default=20, help='Quantity of messages, default is 20.')

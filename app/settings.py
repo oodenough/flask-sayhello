@@ -1,23 +1,17 @@
-# -*- coding: utf-8 -*-
-"""
-    :author: Grey Li (李辉)
-    :url: http://greyli.com
-    :copyright: © 2018 Grey Li <withlihui@gmail.com>
-    :license: MIT, see LICENSE for more details.
-"""
 import os
 import sys
 
-from sayhello import app
+from app import app
 
 # SQLite URI compatible
-WIN = sys.platform.startswith('win')
-if WIN:
+WINDOWS = sys.platform.startswith('win')
+if WINDOWS:
     prefix = 'sqlite:///'
 else:
     prefix = 'sqlite:////'
 
 
+# /data.py
 dev_db = prefix + os.path.join(os.path.dirname(app.root_path), 'data.db')
 
 SECRET_KEY = os.getenv('SECRET_KEY', 'secret string')

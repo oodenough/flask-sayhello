@@ -1,20 +1,13 @@
-# -*- coding: utf-8 -*-
-"""
-    :author: Grey Li (李辉)
-    :url: http://greyli.com
-    :copyright: © 2018 Grey Li <withlihui@gmail.com>
-    :license: MIT, see LICENSE for more details.
-"""
 import unittest
 
 from flask import abort
 
-from sayhello import app, db
-from sayhello.models import Message
-from sayhello.commands import forge, initdb
+from app import app, db
+from app.models import Message
+from app.commands import forge, initdb
 
 
-class SayHelloTestCase(unittest.TestCase):
+class appTestCase(unittest.TestCase):
 
     def setUp(self):
         app.config.update(
@@ -66,7 +59,7 @@ class SayHelloTestCase(unittest.TestCase):
             body='Hello, world.'
         ), follow_redirects=True)
         data = response.get_data(as_text=True)
-        self.assertIn('Your message have been sent to the world!', data)
+        self.assertIn('Your message have been sent to me!', data)
         self.assertIn('Hello, world.', data)
 
     def test_form_validation(self):
@@ -89,12 +82,7 @@ class SayHelloTestCase(unittest.TestCase):
 
     def test_initdb_command(self):
         result = self.runner.invoke(initdb)
-        self.assertIn('Initialized database.', result.output)
-
-    def test_initdb_command_with_drop(self):
-        result = self.runner.invoke(initdb, ['--drop'], input='y\n')
-        self.assertIn('This operation will delete the database, do you want to continue?', result.output)
-        self.assertIn('Drop tables.', result.output)
+        self.assertIn('Database has been initialized.', result.output)
 
 
 if __name__ == '__main__':
