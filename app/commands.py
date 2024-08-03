@@ -5,8 +5,12 @@ from app.database import Message
 
 
 @app.cli.command()
-def initdb():
+def initdb(drop):
     """Initialize SQLite Database."""
+    if drop:
+        click.confirm('This operation will delete the database, do you want to continue?', abort=True)
+        db.drop_all()
+        click.echo('Drop tables.')
     db.create_all()
     click.echo('Database has been initialized.')
 
