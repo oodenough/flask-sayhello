@@ -3,7 +3,7 @@ from wtforms import StringField, SubmitField, TextAreaField
 from wtforms.validators import DataRequired, Length
 
 
-class HelloForm(FlaskForm):
+class MessageForm(FlaskForm):
     name = StringField('Name', validators=[DataRequired(), Length(1, 20)])
     body = TextAreaField('Message', validators=[DataRequired(), Length(1, 200)])
     submit = SubmitField()

@@ -3,7 +3,7 @@ import unittest
 from flask import abort
 
 from app import app, db
-from app.models import Message
+from app.database import Message
 from app.commands import forge, initdb
 
 

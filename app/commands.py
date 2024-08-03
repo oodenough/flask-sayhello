@@ -1,7 +1,7 @@
 import click
 
 from app import app, db
-from app.models import Message
+from app.database import Message
 
 
 @app.cli.command()

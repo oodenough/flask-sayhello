@@ -1,13 +1,13 @@
 from flask import flash, redirect, url_for, render_template
 
 from app import app, db
-from app.forms import HelloForm
-from app.models import Message
+from app.forms import MessageForm
+from app.database import Message
 
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
-    form = HelloForm()
+    form = MessageForm()
     if form.validate_on_submit():
         name = form.name.data
         body = form.body.data
